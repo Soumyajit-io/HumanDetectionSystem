@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLO Human Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Human Detection System</h1>
+    </header>
+    <main class="wrapper">
+        <div class="camera">
+            <h2>Camera Feed</h2>
+            <img id="cameraFeed" src="/camera" alt="Live Camera Feed">
+        </div>
+        <div id="alertBox" class="alertBox safe" aria-live="polite">
+            <h2>Alert Box</h2>
+            <p id="alertText">✅ No Human Detected</p>
+            <p id="alertTime">Last checked: --:--:--</p>
+            <p id="detectedTime"></p>
+            <p id="humanCount"></p>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

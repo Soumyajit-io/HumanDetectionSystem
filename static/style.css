@@ -1,0 +1,66 @@
+body {
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   margin: 0;
+   padding: 0;
+   background: #f4f6f9;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   min-height: 100vh;
+}
+
+header {
+   background-color: #0d6efd;
+   width: 100%;
+   padding: 15px 0;
+   color: white;
+   text-align: center;
+   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+h1 { margin: 0; font-size: 1.8rem; }
+
+.wrapper {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 20px;
+   margin: 20px;
+   width: 100%;
+   max-width: 1400px;
+}
+
+/* Camera feed larger */
+.camera {
+   flex: 2 1 800px; /* bigger portion */
+   max-width: 900px;
+}
+
+.camera img {
+   width: 100%;
+   height: auto;
+   border-radius: 8px;
+   border: 2px solid #ddd;
+   transition: transform 0.2s ease;
+}
+
+.camera img:hover { transform: scale(1.02); }
+
+/* Alert box smaller */
+.alertBox {
+   flex: 1 1 300px; /* smaller portion */
+   max-width: 350px;
+   background: white;
+   padding: 15px;
+   border-radius: 12px;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+   text-align: center;
+   border: 2px solid black;
+   font-weight: bold;
+   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h2 { margin-bottom: 15px; color: #333; }
+
+.alertBox.safe { background-color: #d4edda; color: #155724; }
+.alertBox.detected { background-color: #f8d7da; color: #721c24; }
