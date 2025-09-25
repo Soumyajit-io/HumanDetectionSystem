@@ -16,7 +16,8 @@ output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
 
 # ------------------- CAMERA -------------------
 camera = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-
+camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 # ------------------- DETECTION STATE -------------------
 human_detected = False
 human_count = 0
@@ -34,7 +35,7 @@ def gen_frame():
 
         height, width = frame.shape[:2]
 
-        # YOLO forward pass (on GPU now)
+        # YOLO forward pass
         blob = cv2.dnn.blobFromImage(frame, 1/255.0, (416, 416), swapRB=True, crop=False)
         net.setInput(blob)
         outputs = net.forward(output_layers)

@@ -1,0 +1,5 @@
+flask 
+opencv-python 
+opencv-contrib-python 
+numpy==1.26.4
+# pip install -r requirements.txt

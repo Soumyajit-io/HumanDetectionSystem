@@ -30,9 +30,9 @@ h1 { margin: 0; font-size: 1.8rem; }
    max-width: 1400px;
 }
 
-/* Camera feed larger */
+
 .camera {
-   flex: 2 1 800px; /* bigger portion */
+   flex: 2 1 800px; 
    max-width: 900px;
 }
 
@@ -46,9 +46,9 @@ h1 { margin: 0; font-size: 1.8rem; }
 
 .camera img:hover { transform: scale(1.02); }
 
-/* Alert box smaller */
+/* Alert box  */
 .alertBox {
-   flex: 1 1 300px; /* smaller portion */
+   flex: 1 1 300px; 
    max-width: 350px;
    background: white;
    padding: 15px;
