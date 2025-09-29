@@ -1,28 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YOLO Human Detection</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Drone Controller Dashboard - Integrated YOLO</title>
+    <link rel="stylesheet" href="static\style.css">
 </head>
 <body>
-    <header>
-        <h1>Human Detection System</h1>
-    </header>
-    <main class="wrapper">
-        <div class="camera">
-            <h2>Camera Feed</h2>
-            <img id="cameraFeed" src="/camera" alt="Live Camera Feed">
+    <div class="header">
+        <h1>Drone Controller Dashboard</h1>
+        <p>Developed by Team ResQvater – Smart India Hackathon 2025</p>
+    </div>
+
+    <div class="status-bar">
+        <div class="status-item">
+            <span>WiFi:</span>
+            <span class="status-indicator" id="wifiStatus"></span>
+            <span id="wifiText">Local</span>
         </div>
-        <div id="alertBox" class="alertBox safe" aria-live="polite">
-            <h2>Alert Box</h2>
-            <p id="alertText">✅ No Human Detected</p>
-            <p id="alertTime">Last checked: --:--:--</p>
-            <p id="detectedTime"></p>
-            <p id="humanCount"></p>
+        <div class="status-item">
+            <span>Camera:</span>
+            <span class="status-indicator" id="cameraStatus"></span>
+            <span id="cameraText">Off</span>
         </div>
-    </main>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <div class="status-item">
+            <span>Detection:</span>
+            <span class="status-indicator" id="detectStatusBar"></span>
+            <span id="detectText">Idle</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="left-panel">
+            <div class="video-container">
+                <div class="video-placeholder" id="videoPlaceholder">
+                    <div class="loading-spinner" id="loadingSpinner" style="display:none;"></div>
+                    <div id="placeholderText">📹 Camera Stream</div>
+                    <div style="font-size: 14px; color: #999; margin-top: 10px;">Click "Start Stream" to begin</div>
+                </div>
+                <img class="video-stream" id="videoStream" style="display: none;" alt="Camera Stream">
+
+                <div class="camera-controls">
+                    <button class="control-btn" title="Brightness Up" onclick="adjustBrightness(1)">☀</button>
+                    <button class="control-btn" title="Brightness Down" onclick="adjustBrightness(-1)">☾</button>
+                    <button class="control-btn" title="Contrast Up" onclick="adjustContrast(1)">◐</button>
+                    <button class="control-btn" title="Contrast Down" onclick="adjustContrast(-1)">◑</button>
+                    <button class="control-btn" title="Full Screen" onclick="toggleFullscreen()">⛶</button>
+                </div>
+            </div>
+
+            <div class="stream-controls">
+                <button class="btn btn-start" id="startBtn" onclick="startStream()">Start Stream</button>
+                <button class="btn btn-detect-human" id="detectBtn" onclick="toggleDetect()">Detect Humans</button>
+                <button class="btn btn-stop" id="stopBtn" onclick="stopStream()">Stop Stream</button>
+                <button class="btn btn-record" id="recordBtn" onclick="dummyRecord()">● Record</button>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="location-section">
+                <h2 class="location-title">📍 Live Location</h2>
+                
+                <div class="map-placeholder" id="mapContainer">
+                    <div style="font-size: 24px; margin-bottom: 10px;">🗺️</div>
+                    <div>GPS Map View</div>
+                    <div style="font-size: 12px; margin-top: 5px; opacity: 0.7;">Waiting for GPS lock...</div>
+                </div>
+
+                <div class="location-info">
+                    <div class="info-row">
+                        <span class="info-label">GPS Status:</span>
+                        <span class="info-value">Searching...</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Latitude:</span>
+                        <span class="info-value">00.000000° N</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Longitude:</span>
+                        <span class="info-value">00.000000° E</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Altitude:</span>
+                        <span class="info-value">0.0 m</span>
+                    </div>
+                    <div style="height: 12px;"></div>
+
+                    <div id="detectionPanel" class="alertBox safe" style="margin-top:10px;">
+                        <h2>Huamn Detection Status</h2>
+                        <p id="alertText">✅ No Human Detected</p>
+                        <p id="lastDetected">Last detected: --:--:--</p>
+                        <p id="humanCount">Number of humans: 0</p>
+                    </div>
+                </div>
+
+                <div class="connection-status" id="connectionStatus">
+                    <div id="connectionText">Flask Server</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="static\script.js"></script>
 </body>
 </html>
