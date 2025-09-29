@@ -24,17 +24,6 @@ and displays the processed frames along with detection statistics.
 - YOLOv3 – Object detection model  
 - HTML/CSS/JavaScript – Frontend dashboard
 
-## Project Structure
-static/
-    style.css      -> Dashboard styles
-    script.js      -> Frontend logic (stream + detection controls)
-templates/
-    index.html     -> Main dashboard page
-HumanDetectionSystem.py    -> Flask + OpenCV + YOLO backend
-yolov3.cfg         -> YOLOv3 configuration file
-yolov3.weights     -> YOLOv3 pre-trained weights (download separately)
-coco.names         -> COCO class labels
-
 ## Installation
 
 1. Clone the repository  
